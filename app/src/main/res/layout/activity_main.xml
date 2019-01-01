@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context="net.hang321.sample.app.falldetectionpoc.MainActivity">
+
+  <!--
+  <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Hello World!"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+  -->
+
+  <android.support.design.widget.FloatingActionButton
+    android:id="@+id/fab"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:layout_marginRight="16dp"
+    android:clickable="true"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:srcCompat="@android:drawable/ic_media_play" />
+
+
+  <ScrollView
+    android:id="@+id/scrollview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbarAlwaysDrawVerticalTrack="true">
+
+    <LinearLayout
+      android:id="@+id/linearlayoutControls"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:padding="@dimen/fab_margin">
+
+      <android.support.v7.widget.SwitchCompat
+        android:id="@+id/switchMovement"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:button="@null"
+        android:text="Movement"
+        android:textOff=""
+        android:textOn=""/>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:paddingLeft="@dimen/fab_margin"
+        android:weightSum="10">
+        <TextView
+          android:id="@+id/textViewAccDelta"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="4"
+          android:text="Acceleration delta:"
+          />
+        <TextView
+          android:id="@+id/textViewMovementThresholdValue"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="0.3"
+          android:textAlignment="textEnd"/>
+        <SeekBar
+          android:id="@+id/seekBarMovementThreshold"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="5"
+          android:progress="3"
+          android:max="10"/>
+
+        <!--
+        <org.florescu.android.rangeseekbar.RangeSeekBar
+          android:id="@+id/seekBarMovementThreshold"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          app:absoluteMinValue="0.1"
+          app:absoluteMaxValue="0.9"
+          app:valuesAboveThumbs="true"
+          app:singleThumb="true"/>
+         -->
+      </LinearLayout>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:paddingLeft="@dimen/fab_margin"
+        android:weightSum="10">
+        <TextView
+          android:id="@+id/textViewSecondsToStationary"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="4"
+          android:text="stationary seconds:"/>
+        <TextView
+          android:id="@+id/textViewSecondsToStationaryValue"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="5"
+          android:textAlignment="textEnd"/>
+        <SeekBar
+          android:id="@+id/seekBarSecondsToStationary"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="5"
+          android:progress="5"
+          android:max="60"/>
+      </LinearLayout>
+
+
+      <!-- PerFallID: SMV and acceleration on vertical direction -->
+      <android.support.v7.widget.SwitchCompat
+        android:id="@+id/switchVerticalAcceleration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:button="@null"
+        android:text="Acceleration on Vertical Direction "
+        android:textOff=""
+        android:textOn=""/>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:paddingLeft="@dimen/fab_margin"
+        android:weightSum="10">
+        <TextView
+          android:id="@+id/textViewTotalAccelerometerThreshold"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="4"
+          android:text="Total threshold:"/>
+        <TextView
+          android:id="@+id/textViewTotalAccelerometerThresholdValue"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="17"
+          android:textAlignment="textEnd"/>
+        <SeekBar
+          android:id="@+id/seekBarTotalAccelerometerThreshold"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="5"
+          android:progress="17"
+          android:max="30"/>
+      </LinearLayout>
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:paddingLeft="@dimen/fab_margin"
+        android:weightSum="10">
+        <TextView
+          android:id="@+id/textViewVerticalAccelerometerThreshold"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="4"
+          android:text="Vertical threshold:"/>
+        <TextView
+          android:id="@+id/textViewVerticalAccelerometerThresholdValue"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="11"
+          android:textAlignment="textEnd"/>
+        <SeekBar
+          android:id="@+id/seekBarVerticalAccelerometerThreshold"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="5"
+          android:progress="11"
+          android:max="30"/>
+      </LinearLayout>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:paddingLeft="@dimen/fab_margin"
+        android:weightSum="10">
+        <TextView
+          android:id="@+id/textViewTotalToVerticalRatio"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="4"
+          android:text="Total/Vertical ratio:"/>
+        <TextView
+          android:id="@+id/textViewTotalToVerticalRatioValue"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="0.7"
+          android:textAlignment="textEnd"/>
+        <SeekBar
+          android:id="@+id/seekBarTotalToVerticalRatio"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="5"
+          android:progress="7"
+          android:max="10"/>
+
+      </LinearLayout>
+
+      <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="Sensor values:"
+        android:textStyle="bold"/>
+
+      <!-- Accelerometer -->
+      <TextView
+        android:id="@+id/textViewLabelAccelerometer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/fab_margin"
+        android:paddingRight="@dimen/fab_margin"
+        android:text="Accelerometer:"
+        />
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingLeft="30dp"
+        android:paddingRight="@dimen/fab_margin"
+        android:weightSum="4">
+
+        <TextView
+          android:id="@+id/textViewAccelerometerLabelX"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="X: "
+          android:textAlignment="textEnd"/>
+        <TextView
+          android:id="@+id/textViewAccelerometerValueX"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="3"
+          android:text=""/>
+      </LinearLayout>
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingLeft="30dp"
+        android:paddingRight="@dimen/fab_margin"
+        android:weightSum="4">
+
+        <TextView
+          android:id="@+id/textViewAccelerometerLabelY"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="Y: "
+          android:textAlignment="textEnd"/>
+        <TextView
+          android:id="@+id/textViewAccelerometerValueY"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="3"
+          android:text=""/>
+      </LinearLayout>
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingLeft="30dp"
+        android:paddingRight="@dimen/fab_margin"
+        android:weightSum="4">
+        <TextView
+          android:id="@+id/textViewAccelerometerLabelZ"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="Z: "
+          android:textAlignment="textEnd"/>
+        <TextView
+          android:id="@+id/textViewAccelerometerValueZ"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="3"
+          android:text=""/>
+      </LinearLayout>
+
+
+      <!-- Magnetic Field -->
+      <TextView
+        android:id="@+id/textViewLabelGeomagnetic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/fab_margin"
+        android:paddingRight="@dimen/fab_margin"
+        android:text="Geomagnetic field sensor:"/>
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingLeft="30dp"
+        android:paddingRight="@dimen/fab_margin"
+        android:weightSum="4">
+
+        <TextView
+          android:id="@+id/textViewGeomagneticLabelX"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="X: "
+          android:textAlignment="textEnd"/>
+        <TextView
+          android:id="@+id/textViewGeomagneticValueX"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="3"
+          android:text=""/>
+      </LinearLayout>
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingLeft="30dp"
+        android:paddingRight="@dimen/fab_margin"
+        android:weightSum="4">
+        <TextView
+          android:id="@+id/textViewGeomagneticLabelY"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="Y: "
+          android:textAlignment="textEnd"/>
+        <TextView
+          android:id="@+id/textViewGeomagneticValueY"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="3"
+          android:text=""/>
+      </LinearLayout>
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingLeft="30dp"
+        android:paddingRight="@dimen/fab_margin"
+        android:weightSum="4">
+
+        <TextView
+          android:id="@+id/textViewGeomagneticLabelZ"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="Z: "
+          android:textAlignment="textEnd"/>
+        <TextView
+          android:id="@+id/textViewGeomagneticValueZ"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="3"
+          android:text=""/>
+      </LinearLayout>
+
+      <!-- Rotation Vector -->
+      <TextView
+        android:id="@+id/textViewLabelRotation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/fab_margin"
+        android:paddingRight="@dimen/fab_margin"
+        android:text="Rotation sensor:"/>
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingLeft="30dp"
+        android:paddingRight="@dimen/fab_margin"
+        android:weightSum="4">
+
+        <TextView
+          android:id="@+id/textViewRotationLabelX"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="x*sin(θ/2): "
+          android:textAlignment="textEnd"/>
+        <TextView
+          android:id="@+id/textViewRotationValueX"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="3"
+          android:text=""/>
+      </LinearLayout>
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingLeft="30dp"
+        android:paddingRight="@dimen/fab_margin"
+        android:weightSum="4">
+        <TextView
+          android:id="@+id/textViewRotationLabelY"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="y*sin(θ/2): "
+          android:textAlignment="textEnd"/>
+        <TextView
+          android:id="@+id/textViewRotationValueY"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="3"
+          android:text=""/>
+      </LinearLayout>
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingLeft="30dp"
+        android:paddingRight="@dimen/fab_margin"
+        android:weightSum="4">
+        <TextView
+          android:id="@+id/textViewRotationLabelZ"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="z*sin(θ/2): "
+          android:textAlignment="textEnd"/>
+        <TextView
+          android:id="@+id/textViewRotationValueZ"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="3"
+          android:text=""/>
+      </LinearLayout>
+
+      <TextView
+        android:id="@+id/textViewLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="4dp"
+        android:paddingTop="12dp"
+        android:text="Result: "/>
+
+      <TextView
+        android:id="@+id/textViewResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:paddingLeft="@dimen/fab_margin"
+        android:paddingRight="@dimen/fab_margin"
+        android:paddingTop="2dp"
+        android:textSize="18sp"/>
+
+
+    </LinearLayout>
+
+  </ScrollView>
+
+
+</android.support.constraint.ConstraintLayout>
