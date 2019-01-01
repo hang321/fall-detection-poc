@@ -17,7 +17,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-
 import static net.hang321.sample.app.falldetectionpoc.detectors.MovementDetector.MovementListener;
 import static net.hang321.sample.app.falldetectionpoc.detectors.VerticalAccelerationDetector.VerticalAccelerationListener;
 
